@@ -1,11 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8000",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.2.4",
+    "firebase": "^9.12.1",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0"
