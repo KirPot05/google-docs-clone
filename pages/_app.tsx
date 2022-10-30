@@ -1,16 +1,14 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { ThemeProvider } from "@material-tailwind/react";
 import { SessionProvider } from "next-auth/react";
+import { CustomAppType } from "next/app";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ThemeProvider>
-      <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
-      </SessionProvider>
-    </ThemeProvider>
-  );
-}
+const MyApp: CustomAppType = ({ Component, pageProps }) => (
+  <ThemeProvider>
+    <SessionProvider session={pageProps?.session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  </ThemeProvider>
+);
 
 export default MyApp;
