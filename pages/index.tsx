@@ -4,8 +4,14 @@ import Head from "next/head";
 import Image from "next/image";
 import DocList from "../components/DocList";
 import Header from "../components/Header";
+import { useSession } from "next-auth/react";
+import Login from "../components/Login";
 
 const Home: NextPage = () => {
+  const { data: session, status } = useSession();
+
+  if (status === "unauthenticated") return <Login />;
+
   return (
     <div>
       <Head>
