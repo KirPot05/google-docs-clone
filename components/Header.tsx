@@ -1,6 +1,9 @@
 import { IconButton } from "@material-tailwind/react";
+import { useSession, signOut } from "next-auth/react";
 
 function Header() {
+  const { data: session } = useSession();
+
   return (
     <div className="sticky top-0 z-10 flex items-center px-4 py-2 md:py-4 shadow-md justify-between space-x-3 md:space-x-10">
       {/* Logo Icon */}
@@ -43,7 +46,8 @@ function Header() {
         </IconButton>
 
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg"
+          onClick={() => signOut()}
+          src={session?.user?.image!}
           alt=""
           loading="lazy"
           className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2 bg-contain"
