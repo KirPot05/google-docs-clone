@@ -46,7 +46,7 @@ function Header() {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg"
           alt=""
           loading="lazy"
-          className="cursor-pointer h-12 w-12 rounded-full ml-2 bg-contain"
+          className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2 bg-contain"
         />
       </div>
     </div>
