@@ -45,6 +45,7 @@ function Header() {
           <span className="material-icons text-gray-800"> apps </span>
         </IconButton>
 
+        {/* Profile Image (as avatar) */}
         <img
           onClick={() => signOut()}
           src={session?.user?.image!}
