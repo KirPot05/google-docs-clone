@@ -12,19 +12,15 @@ export async function createDocumentFile(input: string, email: string) {
   try {
     const docRef = doc(db, "docs", "WXUsSCRqDuOUqanC2pv5");
 
-    // const newDoc = {
-    //   docId: docRef.id,
-    //   fileName: input,
-    //   createdAt: new Date(Date.now()).toISOString(),
-    // };
-    // console.log(newDoc);
-    const document = await getDoc(docRef);
+    const newDoc = {
+      docId: docRef.id,
+      fileName: input,
+      createdAt: serverTimestamp(),
+    };
 
-    if (document.exists()) {
-      console.log(document.data());
-    } else {
-      throw new Error("failed to fetch doc");
-    }
+    const addedDoc = await addDoc(collection(db, "docs"), newDoc);
+
+    console.log(addedDoc);
   } catch (err) {
     console.log(err);
   }
