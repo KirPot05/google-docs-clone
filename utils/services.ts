@@ -1,21 +1,29 @@
 import { db } from "./firebase";
 import {
   collection,
-  doc,
   addDoc,
   serverTimestamp,
-  setDoc,
-  getDoc,
+  getDocs,
+  doc,
+  query,
+  where,
 } from "firebase/firestore";
 
 export async function createDocumentFile(input: string, email: string) {
   try {
-    const newDoc = {
-      fileName: input,
-      createdAt: serverTimestamp(),
-    };
+    const q = query(collection(db, "users"), where("email", "==", email));
+    const userSnap = await getDocs(q);
 
-    await addDoc(collection(db, "docs"), newDoc);
+    let userId: string;
+    userSnap.forEach((user) => {
+      userId = user.id;
+    });
+
+    const collectionRef = collection(db, "userDocs", userId!, "docs");
+    await addDoc(collectionRef, {
+      fileName: input,
+      timestamp: serverTimestamp(),
+    });
   } catch (err) {
     console.log(err);
   }
