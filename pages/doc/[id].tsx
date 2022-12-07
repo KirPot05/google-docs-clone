@@ -51,6 +51,7 @@ function Document() {
             <p className="option">Insert</p>
             <p className="option">Format</p>
             <p className="option">Tools</p>
+            <p className="option">About</p>
           </div>
         </div>
 
