@@ -5,13 +5,13 @@ function Header() {
   const { data: session } = useSession();
 
   return (
-    <div className="sticky top-0 z-10 flex items-center px-4 py-2 md:py-4 shadow-md justify-between space-x-3 md:space-x-10">
+    <div className="sticky top-0 z-10 flex items-center justify-between space-x-3 px-4 py-2 shadow-md md:space-x-10 md:py-4">
       {/* Logo Icon */}
-      <div className="md:space-x-3 flex items-center">
+      <div className="flex items-center md:space-x-3">
         <IconButton
           color="gray"
           variant="outlined"
-          className="hidden md:inline-flex h-20 w-20 mt-1 rounded-full border-0"
+          className="mt-1 hidden h-20 w-20 rounded-full border-0 md:inline-flex"
         >
           <span className="material-icons"> menu </span>
         </IconButton>
@@ -21,17 +21,17 @@ function Header() {
           description{" "}
         </span>
 
-        <h2 className="hidden md:inline-flex ml-2 text-gray-700 text-[22px] leading-6">
+        <h2 className="ml-2 hidden text-[22px] leading-6 text-gray-700 md:inline-flex">
           Docs
         </h2>
       </div>
 
       {/* Search bar */}
-      <div className="flex flex-grow items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg focus-within:text-gray-600 focus-within:shadow-md">
+      <div className="flex flex-grow items-center rounded-lg bg-gray-100 px-4 py-2 text-gray-700 focus-within:text-gray-600 focus-within:shadow-md">
         <span className="material-icons"> search </span>
         <input
           type="text"
-          className="bg-transparent outline-none flex-grow px-5 text-base"
+          className="flex-grow bg-transparent px-5 text-base outline-none"
           placeholder="Search"
         />
       </div>
@@ -40,7 +40,7 @@ function Header() {
         <IconButton
           color="gray"
           variant="outlined"
-          className="hidden md:inline-flex h-20 w-20 mt-1 rounded-full border-0"
+          className="mt-1 hidden h-20 w-20 rounded-full border-0 md:inline-flex"
         >
           <span className="material-icons text-gray-800"> apps </span>
         </IconButton>
@@ -51,7 +51,7 @@ function Header() {
           src={session?.user?.image!}
           alt=""
           loading="lazy"
-          className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2 bg-contain"
+          className="ml-2 hidden h-12 w-12 cursor-pointer rounded-full bg-contain md:inline-flex"
         />
       </div>
     </div>

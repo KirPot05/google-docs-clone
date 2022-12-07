@@ -3,27 +3,36 @@ import {
   collection,
   addDoc,
   serverTimestamp,
-  getDocs,
+  setDoc,
   doc,
-  query,
-  where,
 } from "firebase/firestore";
 
 export async function createDocumentFile(input: string, email: string) {
   try {
-    const q = query(collection(db, "users"), where("email", "==", email));
-    const userSnap = await getDocs(q);
-
-    let userId: string;
-    userSnap.forEach((user) => {
-      userId = user.id;
-    });
-
-    const collectionRef = collection(db, "userDocs", userId!, "docs");
+    const collectionRef = collection(db, "userDocs", email, "docs");
     await addDoc(collectionRef, {
       fileName: input,
       timestamp: serverTimestamp(),
     });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function saveDocument(
+  editorState: unknown,
+  email: string,
+  id: string
+) {
+  try {
+    const docRef = doc(db, "userDocs", email, "docs", id);
+    await setDoc(
+      docRef,
+      {
+        editorState,
+      },
+      { merge: true }
+    );
   } catch (err) {
     console.log(err);
   }

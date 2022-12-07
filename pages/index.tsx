@@ -10,6 +10,9 @@ import type { GetServerSideProps } from "next/types";
 import { useState } from "react";
 import Modal from "../components/common/Modal";
 import { createDocumentFile } from "../utils/services";
+import { useCollectionOnce } from "react-firebase-hooks/firestore";
+import { db } from "../utils/firebase";
+import { query, orderBy, collection } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();
@@ -18,11 +21,17 @@ const Home: NextPage = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
+  const [snapshot] = useCollectionOnce(
+    query(
+      collection(db, "userDocs", session?.user?.email!, "docs"),
+      orderBy("timestamp", "desc")
+    )
+  );
+
   const toggleModal = () => setShowModal((state) => !state);
 
   const createDocument = async () => {
     if (input.length === 0) return;
-
     await createDocumentFile(input, session?.user?.email!);
     setInput("");
     toggleModal();
@@ -36,11 +45,11 @@ const Home: NextPage = () => {
 
       <Header />
 
-      <main className="bg-primary pb-10 px-8">
-        <div className="max-w-3xl mx-auto">
+      <main className="bg-primary px-8 pb-10">
+        <div className="mx-auto max-w-3xl">
           {/* Documents header section */}
-          <div className="py-4 flex items-center justify-between">
-            <h2 className="text-gray-700 text-lg">Start a new document</h2>
+          <div className="flex items-center justify-between py-4">
+            <h2 className="text-lg text-gray-700">Start a new document</h2>
             <IconButton variant="outlined" className="border-0 text-gray-700">
               <span className="material-icons">more_vert</span>
             </IconButton>
@@ -48,7 +57,7 @@ const Home: NextPage = () => {
 
           {/* Create a new Document Section */}
           <div>
-            <div className="relative h-52 w-40 border-2 cursor-pointer hover:border-blue-700">
+            <div className="relative h-52 w-40 cursor-pointer border-2 hover:border-blue-700">
               <Image
                 src="https://links.papareact.com/pju"
                 onClick={toggleModal}
@@ -71,13 +80,13 @@ const Home: NextPage = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="outline-none w-full"
+          className="w-full outline-none"
           placeholder="Enter name of the document"
           onKeyDown={(e) => e.key === "Enter" && createDocument()}
         />
       </Modal>
 
-      <DocList />
+      <DocList snapshot={snapshot} />
     </div>
   );
 };

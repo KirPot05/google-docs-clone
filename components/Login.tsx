@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 
 function Login() {
   return (
-    <div className="flex items-center justify-center flex-col min-h-screen py-2 space-y-5">
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-5 py-2">
       <Image
         src="https://www.dignited.com/wp-content/uploads/2020/04/Google-Docs-Header-1280x720-1-1024x576.png"
         height={300}
