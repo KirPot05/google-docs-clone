@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import { useRouter } from "next/dist/client/router";
@@ -5,9 +6,13 @@ import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useSession } from "next-auth/react";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { saveDocument } from "../utils/services";
+import { EditorProps } from "react-draft-wysiwyg";
+const Editor = dynamic<EditorProps>(
+  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
+  { ssr: false }
+);
 
 function TextEditor() {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
