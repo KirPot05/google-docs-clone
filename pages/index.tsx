@@ -55,9 +55,14 @@ const Home = () => {
           {/* Documents header section */}
           <div className="flex items-center justify-between py-4">
             <h2 className="text-lg text-gray-700">Start a new document</h2>
-            <IconButton variant="outlined" className="border-0 text-gray-700">
-              <span className="material-icons">more_vert</span>
-            </IconButton>
+            <IconButton
+              variant="outlined"
+              className="border-0 text-gray-700"
+              children={<span className="material-icons">more_vert</span>}
+              nonce={undefined}
+              onResize={undefined}
+              onResizeCapture={undefined}
+            ></IconButton>
           </div>
 
           {/* Create a new Document Section */}

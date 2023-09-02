@@ -12,7 +12,13 @@ function Login() {
         objectFit="contain"
         alt=""
       />
-      <Button className="w-48 text-sm" onClick={() => signIn("google")}>
+      <Button
+        className="w-48 text-sm"
+        onClick={() => signIn("google")}
+        nonce={undefined}
+        onResize={undefined}
+        onResizeCapture={undefined}
+      >
         {" "}
         LOGIN{" "}
       </Button>

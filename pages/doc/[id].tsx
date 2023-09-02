@@ -6,8 +6,8 @@ import Login from "../../components/Login";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
-import { GetServerSideProps } from "next";
 import TextEditor from "../../components/TextEditor";
+import { GetServerSideProps } from "next/types";
 
 function Document() {
   const { data: session, status } = useSession();
@@ -55,7 +55,12 @@ function Document() {
           </div>
         </div>
 
-        <Button className="hidden h-10 items-center space-x-1 md:!inline-flex">
+        <Button
+          className="hidden h-10 items-center space-x-1 md:!inline-flex"
+          nonce={undefined}
+          onResize={undefined}
+          onResizeCapture={undefined}
+        >
           {" "}
           <span className="material-icons"> group </span>
           <span>Share</span>{" "}

@@ -30,9 +30,11 @@ function DocumentRow({ fileName, date, id }: Props) {
         color="gray"
         variant="outlined"
         className="mt-1 hidden h-20 w-20 rounded-full border-0 md:inline-flex"
-      >
-        <span className="material-icons"> more_vert </span>
-      </IconButton>
+        children={<span className="material-icons"> more_vert </span>}
+        nonce={undefined}
+        onResize={undefined}
+        onResizeCapture={undefined}
+      />
     </div>
   );
 }

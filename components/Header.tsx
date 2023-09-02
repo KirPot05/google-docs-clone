@@ -12,6 +12,9 @@ function Header() {
           color="gray"
           variant="outlined"
           className="mt-1 hidden h-20 w-20 rounded-full border-0 md:inline-flex"
+          nonce={undefined}
+          onResize={undefined}
+          onResizeCapture={undefined}
         >
           <span className="material-icons"> menu </span>
         </IconButton>
@@ -41,6 +44,9 @@ function Header() {
           color="gray"
           variant="outlined"
           className="mt-1 hidden h-20 w-20 rounded-full border-0 md:inline-flex"
+          nonce={undefined}
+          onResize={undefined}
+          onResizeCapture={undefined}
         >
           <span className="material-icons text-gray-800"> apps </span>
         </IconButton>
