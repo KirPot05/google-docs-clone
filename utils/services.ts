@@ -10,10 +10,12 @@ import {
 export async function createDocumentFile(input: string, email: string) {
   try {
     const collectionRef = collection(db, "userDocs", email, "docs");
-    await addDoc(collectionRef, {
+    const { id: documentId } = await addDoc(collectionRef, {
       fileName: input,
       timestamp: serverTimestamp(),
     });
+
+    return documentId;
   } catch (err) {
     console.log(err);
   }

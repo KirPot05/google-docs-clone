@@ -1,20 +1,23 @@
 import { IconButton } from "@material-tailwind/react";
-import type { NextPage } from "next";
+// import  from "next";
 import Head from "next/head";
 import Image from "next/image";
 import DocList from "../components/DocList";
 import Header from "../components/Header";
 import { useSession, getSession } from "next-auth/react";
 import Login from "../components/Login";
-import type { GetServerSideProps } from "next/types";
 import { useState } from "react";
 import Modal from "../components/common/Modal";
 import { createDocumentFile } from "../utils/services";
-import { useCollectionOnce } from "react-firebase-hooks/firestore";
+import {
+  useCollection,
+  useCollectionOnce,
+} from "react-firebase-hooks/firestore";
 import { db } from "../utils/firebase";
 import { query, orderBy, collection } from "firebase/firestore";
+import { useRouter } from "next/dist/client/router";
 
-const Home: NextPage = () => {
+const Home = () => {
   const { data: session, status } = useSession();
 
   if (status === "unauthenticated") return <Login />;
@@ -27,14 +30,16 @@ const Home: NextPage = () => {
       orderBy("timestamp", "desc")
     )
   );
+  const router = useRouter();
 
   const toggleModal = () => setShowModal((state) => !state);
 
   const createDocument = async () => {
     if (input.length === 0) return;
-    await createDocumentFile(input, session?.user?.email!);
+    const docId = await createDocumentFile(input, session?.user?.email!);
     setInput("");
     toggleModal();
+    router.push(`/doc/${docId}`);
   };
 
   return (
@@ -93,7 +98,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
   const session = await getSession(context);
   return {
     props: {
